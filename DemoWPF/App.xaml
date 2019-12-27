@@ -1,0 +1,21 @@
+﻿<Application x:Class="DemoWPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DemoWPF"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Light.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
+                <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Purple.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#fb9337"></SolidColorBrush>
+            <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#ffffff"></SolidColorBrush>
+
+            <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#485B79"></SolidColorBrush>
+            <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#ffffff"></SolidColorBrush>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
