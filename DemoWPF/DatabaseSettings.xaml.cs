@@ -30,18 +30,21 @@ namespace DemoWPF
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //string ip = ConfigurationManager.AppSettings["Ip"];
-            //string account = ConfigurationManager.AppSettings["Account"];
-            //string password = ConfigurationManager.AppSettings["Password"];
             txtServerAddress.Text = ConfigurationManager.AppSettings["Ip"];
             txtUsername.Text = ConfigurationManager.AppSettings["Account"];
             txtPassword.Password = ConfigurationManager.AppSettings["Password"];
         }
 
+        
+
         private void btnTestDB_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                //if (await TestFunc())
+                //    MessageBox.Show(this, "Connect database success!!!");
+                //else
+                //    MessageBox.Show(this, "Failed!!!");
                 db.Database.Connection.Open();
                 MessageBox.Show(this, "Connect database success!!!");
             }
@@ -52,6 +55,21 @@ namespace DemoWPF
             finally
             {
                 db.Dispose();
+            }
+        }
+
+        private async Task<bool> TestFunc()
+        {
+            //db.Database.Connection.Open()
+            try
+            {
+                db.Database.Connection.Open();
+                return true;
+            }
+            catch
+            {
+                db.Dispose();
+                return false;
             }
         }
 
@@ -76,9 +94,7 @@ namespace DemoWPF
             LoadConnectionString();
             MessageBox.Show(this, "Update success!!!");
 
-            //string ip = ConfigurationManager.AppSettings["Ip"];
-            //string account = ConfigurationManager.AppSettings["Account"];
-            //string password = ConfigurationManager.AppSettings["Password"];
+           
             //string _connStr = String.Format("metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source={0};initial catalog=AdventureWorks2008R2;user id={1};password={2};MultipleActiveResultSets=True;App=EntityFramework&quot;",ip,account,password);
             //var m = HttpUtility.HtmlDecode(_connStr);
             //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);

@@ -27,7 +27,7 @@
         <TextBox x:Name="txtChangeUser" HorizontalAlignment="Left" Height="30" Margin="109,136,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnChangeUser" Content="Change"  Margin="471,136,239,0" VerticalAlignment="Top" Width="80" Height="30" Click="BtnChangeUser" />
         <Button
-  Style="{StaticResource MaterialDesignFlatMidBgButton}" VerticalAlignment="Stretch" Height="30" Width="100" Margin="471,186,227,203">
+  Style="{StaticResource MaterialDesignFlatMidBgButton}" VerticalAlignment="Stretch" Height="30" Margin="471,186,220,203">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Height="18"><Run Text="ABC"/></TextBlock>
                 <materialDesign:PackIcon
