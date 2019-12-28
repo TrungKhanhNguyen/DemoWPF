@@ -11,10 +11,10 @@
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Primary/MaterialDesignColor.Blue.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignColors;component/Themes/Recommended/Accent/MaterialDesignColor.Purple.xaml" />
             </ResourceDictionary.MergedDictionaries>
-            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#fb9337"></SolidColorBrush>
+            <SolidColorBrush x:Key="PrimaryHueMidBrush" Color="#485B79"></SolidColorBrush>
             <SolidColorBrush x:Key="PrimaryHueMidForegroundBrush" Color="#ffffff"></SolidColorBrush>
 
-            <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#485B79"></SolidColorBrush>
+            <SolidColorBrush x:Key="SecondaryAccentBrush" Color="#fb9337"></SolidColorBrush>
             <SolidColorBrush x:Key="SecondaryAccentForegroundBrush" Color="#ffffff"></SolidColorBrush>
         </ResourceDictionary>
     </Application.Resources>
