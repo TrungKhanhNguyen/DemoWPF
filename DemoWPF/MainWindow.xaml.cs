@@ -63,5 +63,10 @@ namespace DemoWPF
             MessageBox.Show(this, "Update success!!!");
             
         }
+
+        private void btnCheckDBConn_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

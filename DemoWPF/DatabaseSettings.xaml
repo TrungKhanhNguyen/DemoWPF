@@ -5,26 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DemoWPF"
         mc:Ignorable="d"
-        Title="DatabaseSettings" Height="265.574" Width="651.229" ResizeMode="NoResize">
+        Title="DatabaseSettings" Height="275" Width="660" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" Loaded="Window_Loaded">
     <Window.Resources>
         <Style TargetType="{x:Type Window}">
             <Setter Property="FontSize" Value="15" />
         </Style>
     </Window.Resources>
-    <Grid Margin="0,0,0,0">
-        <GroupBox Header="GroupBox" HorizontalAlignment="Left" Height="217" Margin="10,10,0,0" VerticalAlignment="Top" Width="626" >
-            <Grid Width="598">
+    <Grid Width="650" Margin="0,0,0,0">
+        <GroupBox Header="..." HorizontalAlignment="Left" Height="217" Margin="10,10,0,0" VerticalAlignment="Top" Width="626" >
+            <Grid Width="611">
                 <Label Content="Server Address" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                <TextBox HorizontalAlignment="Left" Height="30" Margin="10,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
+                <TextBox x:Name="txtServerAddress" HorizontalAlignment="Left" Height="30" Margin="10,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170" FontSize="16"/>
                 <Label Content="Username" HorizontalAlignment="Left" Margin="213,10,0,0" VerticalAlignment="Top"/>
-                <TextBox HorizontalAlignment="Left" Height="30" Margin="213,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170"/>
+                <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="30" Margin="213,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170" FontSize="16"/>
                 <Label Content="Password" HorizontalAlignment="Left" Margin="416,10,0,0" VerticalAlignment="Top"/>
-                <PasswordBox HorizontalAlignment="Left" Margin="416,43,0,0" VerticalAlignment="Top" Width="170"/>
-                <Button Content="Test Connection" HorizontalAlignment="Left" Margin="165,0,0,20" VerticalAlignment="Bottom" Width="150"/>
-                <Button Content="Cập nhật" HorizontalAlignment="Left" Margin="336,0,0,20" VerticalAlignment="Bottom" Width="150"/>
-
-
-
+                <PasswordBox x:Name="txtPassword" HorizontalAlignment="Left" Margin="416,43,0,0" VerticalAlignment="Top" Width="170" FontSize="16"/>
+                <Button x:Name="btnTestDB" Content="Test Connection" HorizontalAlignment="Left" Margin="165,0,0,20" VerticalAlignment="Bottom" Width="150" Click="btnTestDB_Click"/>
+                <Button x:Name="btnDBUpdate" Style="{StaticResource MaterialDesignFlatAccentBgButton}" Content="Cập nhật" HorizontalAlignment="Left" Margin="336,0,0,20" VerticalAlignment="Bottom" Width="150" Click="btnDBUpdate_Click"/>
             </Grid>
             
         </GroupBox>
