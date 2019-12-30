@@ -77,6 +77,9 @@
     <Compile Include="DatabaseSettings.xaml.cs">
       <DependentUpon>DatabaseSettings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DemoGrid.xaml.cs">
+      <DependentUpon>DemoGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Department.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -89,6 +92,7 @@
     <Compile Include="EmployeePayHistory.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helper.cs" />
     <Compile Include="JobCandidate.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -100,7 +104,12 @@
     <Compile Include="Shift.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\DepartmentDB.cs" />
     <Page Include="DatabaseSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DemoGrid.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

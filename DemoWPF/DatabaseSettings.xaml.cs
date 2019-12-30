@@ -22,10 +22,11 @@ namespace DemoWPF
     public partial class DatabaseSettings : Window
     {
         public AdventureWorks2008R2Entities db;
+        private Helper helper = new Helper();
         public DatabaseSettings()
         {
             InitializeComponent();
-            LoadConnectionString();
+            UpdateConnectionString();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -34,17 +35,10 @@ namespace DemoWPF
             txtUsername.Text = ConfigurationManager.AppSettings["Account"];
             txtPassword.Password = ConfigurationManager.AppSettings["Password"];
         }
-
-        
-
         private void btnTestDB_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                //if (await TestFunc())
-                //    MessageBox.Show(this, "Connect database success!!!");
-                //else
-                //    MessageBox.Show(this, "Failed!!!");
                 db.Database.Connection.Open();
                 MessageBox.Show(this, "Connect database success!!!");
             }
@@ -58,29 +52,24 @@ namespace DemoWPF
             }
         }
 
-        private async Task<bool> TestFunc()
-        {
-            //db.Database.Connection.Open()
-            try
-            {
-                db.Database.Connection.Open();
-                return true;
-            }
-            catch
-            {
-                db.Dispose();
-                return false;
-            }
-        }
+        //private async Task<bool> TestFunc()
+        //{
+        //    try
+        //    {
+        //        db.Database.Connection.Open();
+        //        return true;
+        //    }
+        //    catch
+        //    {
+        //        db.Dispose();
+        //        return false;
+        //    }
+        //}
 
-        private void LoadConnectionString()
+        private void UpdateConnectionString()
         {
-            string ip = ConfigurationManager.AppSettings["Ip"];
-            string account = ConfigurationManager.AppSettings["Account"];
-            string password = ConfigurationManager.AppSettings["Password"];
-            string _connStr = String.Format("metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source={0};initial catalog=AdventureWorks2008R2;user id={1};password={2};MultipleActiveResultSets=True;App=EntityFramework&quot;", ip, account, password);
-            var connDecoded = HttpUtility.HtmlDecode(_connStr);
-            db = new AdventureWorks2008R2Entities(connDecoded);
+            var conn = Helper.GetConnectionString();
+            db = new AdventureWorks2008R2Entities(conn);
         }
 
         private void btnDBUpdate_Click(object sender, RoutedEventArgs e)
@@ -91,18 +80,9 @@ namespace DemoWPF
             config.AppSettings.Settings["Password"].Value = txtPassword.Password;
             config.Save();
             ConfigurationManager.RefreshSection("appSettings");
-            LoadConnectionString();
+            UpdateConnectionString();
             MessageBox.Show(this, "Update success!!!");
 
-           
-            //string _connStr = String.Format("metadata=res://*/Model1.csdl|res://*/Model1.ssdl|res://*/Model1.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source={0};initial catalog=AdventureWorks2008R2;user id={1};password={2};MultipleActiveResultSets=True;App=EntityFramework&quot;",ip,account,password);
-            //var m = HttpUtility.HtmlDecode(_connStr);
-            //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            //config.ConnectionStrings.ConnectionStrings["AdventureWorks2008R2Entities"].ConnectionString = m;
-            //config.Save(ConfigurationSaveMode.Modified, true);
-            //ConfigurationManager.RefreshSection("connectionStrings");
-            //LoadConnectionString();
-            //MessageBox.Show(this, "Update success!!!");
         }
 
         
