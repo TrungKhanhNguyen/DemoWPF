@@ -19,17 +19,16 @@ namespace DemoWPF
     /// </summary>
     public partial class DemoGrid : Window
     {
-        //private AdventureWorks2008R2Entities db;
-        //private Helper helper = new Helper();
+        private AdventureWorks2008R2Entities db;
         public DemoGrid()
         {
             InitializeComponent();
-            //db = new AdventureWorks2008R2Entities(Helper.GetConnectionString());
+            db = new AdventureWorks2008R2Entities(Helper.GetConnectionString());
         }
 
-        //private void Window_Loaded(object sender, RoutedEventArgs e)
-        //{
-        //    datagrid1.ItemsSource = db.Departments.ToList();
-        //}
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            datagrid1.ItemsSource = db.Departments.ToList();
+        }
     }
 }

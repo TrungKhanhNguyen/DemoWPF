@@ -3,26 +3,56 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:ViewModel="clr-namespace:DemoWPF.ViewModel"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="DemoGrid" Height="450" Width="800">
-    <Window.DataContext>
+        Title="DemoGrid" Height="450" Width="800" Loaded="Window_Loaded">
+    <!--<Window.DataContext>
         <ViewModel:DepartmentDB/>
-    </Window.DataContext>
+    </Window.DataContext>-->
+    <Window.Resources>
+        <Style TargetType="{x:Type DatePicker}">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <TextBox x:Name="PART_TextBox"
+            Text="{Binding Path=SelectedDate, StringFormat='dd.MM.yyyy', 
+            RelativeSource={RelativeSource AncestorType={x:Type DatePicker}}}" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
     <Grid>
-        <TextBox x:Name="txtDepartmentID" HorizontalAlignment="Left" Height="23" Margin="26,35,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="80"/>
-        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="133,35,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="170"/>
-        <TextBox x:Name="txtGroupName" HorizontalAlignment="Left" Height="23" Margin="334,35,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="169"/>
-        <DatePicker x:Name="dpModifiedDate" HorizontalAlignment="Left" Margin="525,33,0,0" VerticalAlignment="Top" Width="118"/>
-        <DataGrid x:Name="datagrid1"  AutoGenerateColumns="False" HorizontalAlignment="Left" Height="305" Margin="26,84,0,0" VerticalAlignment="Top" Width="744" ItemsSource="{Binding Path=Departs}">
+        <TextBox x:Name="txtDepartmentID" HorizontalAlignment="Left" Height="25" Margin="26,35,0,0" Text="{Binding SelectedItem.DepartmentID,ElementName=datagrid1}" VerticalAlignment="Top" Width="80"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="25" Margin="133,35,0,0" Text="{Binding SelectedItem.Name,ElementName=datagrid1}" VerticalAlignment="Top" Width="170"/>
+        <TextBox x:Name="txtGroupName" MaxLines="3" ToolTip="{Binding SelectedItem.GroupName,ElementName=datagrid1}" HorizontalAlignment="Left" Height="25" Margin="334,35,0,0" Text="{Binding SelectedItem.GroupName,ElementName=datagrid1}" VerticalAlignment="Top" Width="170"/>
+        <DatePicker x:Name="dpModifiedDate" HorizontalAlignment="Left" Margin="525,33,0,0" VerticalAlignment="Top" Width="118" SelectedDate="{Binding SelectedItem.ModifiedDate,ElementName=datagrid1}" />
+        <Grid>
+            <Button Width="80" Content="Prev" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding MovePreviousCommand}" Margin="130,79,0,0" />
+            <Button Width="80" Content="Next" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding MoveNextCommand}" Margin="23,79,0,0" />
+            <materialDesign:DialogHost></materialDesign:DialogHost>
+            <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                materialDesign:DialogHost.DialogClosingAttached="Sample2_DialogHost_OnDialogClosing"
+                                Width="128" Margin="322,79,342,308">
+                <Button.CommandParameter>
+                    <StackPanel Margin="16">
+                        <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0" />
+                        <Button Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" 
+                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                            CommandParameter="Sample2Cancel"
+                                            HorizontalAlignment="Center">CANCEL</Button>
+                    </StackPanel>
+                </Button.CommandParameter>
+                PASS VIEW
+            </Button>
+        </Grid>
+        <DataGrid IsReadOnly="True" x:Name="datagrid1"  AutoGenerateColumns="False" HorizontalAlignment="Stretch" Margin="20,134,20,10" VerticalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="DepartmentID" Binding="{Binding DepartmentID}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Group Name" Binding="{Binding GroupName}"></DataGridTextColumn>
-                <DataGridTextColumn Header="Modified Date" Binding="{Binding ModifiedDate}"></DataGridTextColumn>
-                <!--<DataGridTextColumn Header="Name" Width="SizeToCells" MinWidth="125" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Age" Width="SizeToCells" MinWidth="200" Binding="{Binding Age}"/>
-                <DataGridTextColumn Header="Description" Width="SizeToCells" MinWidth="200" Binding="{Binding Description}"/>-->
+                <DataGridTextColumn Header="Modified Date" Binding="{Binding ModifiedDate,StringFormat=\{0:dd.MM.yyyy\}}"></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
 
