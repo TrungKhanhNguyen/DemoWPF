@@ -110,6 +110,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\DepartmentDB.cs" />
+    <Compile Include="ViewModel\PickerViewModel.cs" />
     <Compile Include="ViewModel\Window2ViewModel.cs" />
     <Page Include="DatabaseSettings.xaml">
       <SubType>Designer</SubType>

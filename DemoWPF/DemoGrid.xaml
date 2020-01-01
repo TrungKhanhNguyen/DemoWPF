@@ -6,9 +6,6 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="DemoGrid" Height="450" Width="800" Loaded="Window_Loaded">
-    <!--<Window.DataContext>
-        <ViewModel:DepartmentDB/>
-    </Window.DataContext>-->
     <Window.Resources>
         <Style TargetType="{x:Type DatePicker}">
             <Setter Property="Control.Template">
@@ -21,8 +18,15 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Grid x:Key="myDrawerContent">
+            <StackPanel Grid.Row="1" Margin="8" HorizontalAlignment="Right" Orientation="Horizontal">
+                <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" IsDefault="True"
+                        CommandParameter="1" Style="{DynamicResource MaterialDesignFlatButton}">OK</Button>
+                <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" IsCancel="True"
+                        CommandParameter="0" Style="{DynamicResource MaterialDesignFlatButton}">CANCEL</Button>
+            </StackPanel>
+        </Grid>
     </Window.Resources>
-
     <Grid>
         <TextBox x:Name="txtDepartmentID" HorizontalAlignment="Left" Height="25" Margin="26,35,0,0" Text="{Binding SelectedItem.DepartmentID,ElementName=datagrid1}" VerticalAlignment="Top" Width="80"/>
         <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="25" Margin="133,35,0,0" Text="{Binding SelectedItem.Name,ElementName=datagrid1}" VerticalAlignment="Top" Width="170"/>
@@ -31,23 +35,111 @@
         <Grid>
             <Button Width="80" Content="Prev" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding MovePreviousCommand}" Margin="130,79,0,0" />
             <Button Width="80" Content="Next" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding MoveNextCommand}" Margin="23,79,0,0" />
-            <materialDesign:DialogHost></materialDesign:DialogHost>
-            <Button Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
-                                materialDesign:DialogHost.DialogClosingAttached="Sample2_DialogHost_OnDialogClosing"
-                                Width="128" Margin="322,79,342,308">
-                <Button.CommandParameter>
-                    <StackPanel Margin="16">
-                        <ProgressBar Style="{DynamicResource MaterialDesignCircularProgressBar}" HorizontalAlignment="Center" Margin="16" IsIndeterminate="True" Value="0" />
-                        <Button Style="{StaticResource MaterialDesignFlatButton}" IsCancel="True" 
-                                            Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
-                                            CommandParameter="Sample2Cancel"
-                                            HorizontalAlignment="Center">CANCEL</Button>
-                    </StackPanel>
-                </Button.CommandParameter>
-                PASS VIEW
-            </Button>
         </Grid>
-        <DataGrid IsReadOnly="True" x:Name="datagrid1"  AutoGenerateColumns="False" HorizontalAlignment="Stretch" Margin="20,134,20,10" VerticalAlignment="Stretch">
+       
+        <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,20,0" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
+                CommandParameter="{x:Static Dock.Left}"
+                CommandTarget="{Binding ElementName=DrawerCustom}"
+                >
+            <materialDesign:PackIcon Kind="ArrowLeft" />
+        </Button>
+        <materialDesign:DrawerHost Name="DrawerCustom" Panel.ZIndex="2">
+            <materialDesign:DrawerHost.LeftDrawerContent>
+                <StackPanel Margin="16">
+                    <TextBlock Margin="4" HorizontalAlignment="Center">LEFT FIELD</TextBlock>
+                    <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                        CommandParameter="{x:Static Dock.Left}"
+                        Margin="4" HorizontalAlignment="Center"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
+                        CLOSE THIS
+                    </Button>
+                    <Button Command="{x:Static materialDesign:DrawerHost.CloseDrawerCommand}"
+                        Margin="4" HorizontalAlignment="Center"
+                        Style="{DynamicResource MaterialDesignFlatButton}">
+                        CLOSE ALL
+                    </Button>
+                </StackPanel>
+            </materialDesign:DrawerHost.LeftDrawerContent>
+        </materialDesign:DrawerHost>
+
+
+        <Button HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,80,0,0" Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                CommandParameter="{StaticResource myDrawerContent}"
+            CommandTarget="{Binding ElementName=PopupAddCustom}">
+           Open Dialog
+        </Button>
+        <materialDesign:DialogHost Name="PopupAddCustom" Panel.ZIndex="100">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Calendar x:Name="Calendar2" Margin="-1 -4 -1 0" />
+                    <StackPanel Grid.Row="1" Margin="8" HorizontalAlignment="Right" Orientation="Horizontal">
+                        <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" IsDefault="True"
+                        CommandParameter="1" Style="{DynamicResource MaterialDesignFlatButton}">OK</Button>
+                        <Button Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" IsCancel="True"
+                        CommandParameter="0" Style="{DynamicResource MaterialDesignFlatButton}">CANCEL</Button>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+
+        <Grid Visibility="Hidden" Grid.Column="0" Grid.Row="1" Margin="5 0 0 0">
+            <materialDesign:DialogHost HorizontalAlignment="Center" VerticalAlignment="Center">
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel Margin="16">
+                        <TextBlock>Add a new fruit.</TextBlock>
+                        <TextBox Margin="0 8 0 0" HorizontalAlignment="Stretch" x:Name="FruitTextBox" />
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" >
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsDefault="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                                <Button.CommandParameter>
+                                    True
+                                </Button.CommandParameter>
+                                ACCEPT
+                            </Button>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                        IsCancel="True"
+                                        Margin="0 8 8 0"
+                                        Command="materialDesign:DialogHost.CloseDialogCommand">
+                                <Button.CommandParameter>
+                                    False
+                                </Button.CommandParameter>
+                                CANCEL
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:DialogHost.DialogContent>
+                <Border BorderThickness="1" BorderBrush="{DynamicResource PrimaryHueMidBrush}"
+                            MinWidth="256" MinHeight="256" ClipToBounds="True">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <ListBox x:Name="FruitListBox">
+                            <ListBoxItem>Apple</ListBoxItem>
+                            <ListBoxItem>Banana</ListBoxItem>
+                            <ListBoxItem>Pear</ListBoxItem>
+                        </ListBox>
+                        <materialDesign:ColorZone Mode="PrimaryMid" Grid.Row="1" >
+                            <TextBlock Margin="16">Fruit Bowl</TextBlock>
+                        </materialDesign:ColorZone>
+                        <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}"
+                                    Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}"
+                                    VerticalAlignment="Bottom" HorizontalAlignment="Right" 
+                                    Grid.Row="0" Margin="0 0 28 -20">
+                            <materialDesign:PackIcon Kind="Plus" Height="22" Width="22"/>
+                        </Button>
+                    </Grid>
+                </Border>
+            </materialDesign:DialogHost>
+        </Grid>
+        <DataGrid IsReadOnly="True" x:Name="datagrid1"  AutoGenerateColumns="False" HorizontalAlignment="Stretch" Margin="20,160,20,10" VerticalAlignment="Stretch">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="DepartmentID" Binding="{Binding DepartmentID}"></DataGridTextColumn>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}"></DataGridTextColumn>
