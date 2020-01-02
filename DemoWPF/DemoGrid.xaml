@@ -36,7 +36,6 @@
             <Button Width="80" Content="Prev" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding MovePreviousCommand}" Margin="130,79,0,0" />
             <Button Width="80" Content="Next" VerticalAlignment="Top" HorizontalAlignment="Left" Command="{Binding MoveNextCommand}" Margin="23,79,0,0" />
         </Grid>
-       
         <Button HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,80,20,0" Command="{x:Static materialDesign:DrawerHost.OpenDrawerCommand}"
                 CommandParameter="{x:Static Dock.Left}"
                 CommandTarget="{Binding ElementName=DrawerCustom}"
