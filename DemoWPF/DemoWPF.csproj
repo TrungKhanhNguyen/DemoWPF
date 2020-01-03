@@ -77,6 +77,8 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converter\DateConverter.cs" />
+    <Compile Include="Crawler\CrawlerObject.cs" />
+    <Compile Include="Crawler\CrawlerServices.cs" />
     <Compile Include="DatabaseSettings.xaml.cs">
       <DependentUpon>DatabaseSettings.xaml</DependentUpon>
     </Compile>
